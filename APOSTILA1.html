@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Alfabeto Español — Aula 1 (Página 1 + Página 2)</title>
+
+<style>
+  :root{
+    --paper:#f3f4df;
+    --blue:#3aa0e6;
+    --violet:#9b59b6;
+    --red:#d94b3a;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:#e5e7eb;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:10px;
+  }
+  .wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+
+  /* A4 horizontal */
+  .page{
+    width:300mm;
+    height:250mm;
+    background: var(--paper);
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    display:block;
+  }
+  .content{ position:absolute; left:18mm; right:18mm; top:16mm; bottom:18mm; }
+
+  /* título + linha azul */
+  .titleRow{
+    margin-top:6px;
+    display:grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items:center;
+    column-gap:10px;
+  }
+  .bncc{
+    font-weight:700;
+    font-size:10pt;
+    color:#000;
+    text-align:right;
+  }
+  .centerTitle{
+    color: var(--violet);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:0.8px;
+    font-size:11pt;
+    text-align:center;
+  }
+  .bars{
+    margin-top:5px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+  }
+  .bar{
+    height:7px;
+    background: var(--blue);
+    border-radius:2px;
+  }
+
+  /* colunas */
+  .cols{
+    margin-top:8px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+  }
+
+  /* cards */
+  .card{
+    background:#fff;
+    border:2px dotted var(--violet);
+    border-radius:12px;
+    padding:8px;
+  }
+  .cardTitle{
+    font-weight:900;
+    text-align:center;
+    font-size:10pt;
+    margin-bottom:6px;
+    color:#4a148c;
+    letter-spacing:.2px;
+  }
+  .hint{
+    font-size:9pt;
+    line-height:1.2;
+    color:#111;
+    text-align:center;
+  }
+
+  /* ===== página 1 (alfabeto) ===== */
+  .controls{
+    margin-top:6px;
+    display:flex;
+    gap:6px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .ctrlBtn{
+    border:2px solid rgba(0,0,0,.55);
+    background:#fff;
+    border-radius:999px;
+    padding:5px 9px;
+    font-weight:900;
+    font-size:9pt;
+    cursor:pointer;
+  }
+  .speakPanel{
+    margin-top:6px;
+    border:2px dashed rgba(0,0,0,.55);
+    border-radius:12px;
+    padding:7px;
+    background: rgba(58,160,230,.08);
+  }
+  .speakBig{
+    font-weight:900;
+    font-size:13pt;
+    text-align:center;
+    color:#0b2b4a;
+    margin-bottom:4px;
+    line-height:1.05;
+  }
+  .speakSmall{
+    font-size:9pt;
+    color:#111;
+    text-align:center;
+    line-height:1.2;
+  }
+  .abcGrid{
+    margin-top:6px;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap:5px;
+  }
+  .abcBtn{
+    height:13.2mm;
+    border:2px solid rgba(0,0,0,.55);
+    border-radius:12px;
+    background: linear-gradient(#ffffff, rgba(255,255,255,.65));
+    box-shadow: 0 4px 0 rgba(0,0,0,.25);
+    font-weight:900;
+    font-size:13pt;
+    cursor:pointer;
+    user-select:none;
+    line-height:1;
+    padding:0;
+  }
+  .abcBtn:active{
+    transform: translateY(4px);
+    box-shadow: 0 0 0 rgba(0,0,0,.25);
+  }
+  .c0{ background: linear-gradient(#fff6bf, #ffe08a); }
+  .c1{ background: linear-gradient(#d9fbff, #b9f6ff); }
+  .c2{ background: linear-gradient(#ffe3f0, #ffd1e6); }
+  .c3{ background: linear-gradient(#ddffe2, #c6ffcf); }
+  .c4{ background: linear-gradient(#f0e2ff, #e7d3ff); }
+  .c5{ background: linear-gradient(#fff8d8, #fff3b0); }
+
+  .actText{
+    font-size:8.8pt;
+    line-height:1.2;
+    text-align:justify;
+    margin:0;
+  }
+  .gridImgWrap{
+    margin-top:6px;
+    border:3px solid rgba(0,0,0,.65);
+    border-radius:10px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .gridImg{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  /* ===== respostas compactas (página 1) ===== */
+  .answers{
+    margin-top:1px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:1px;
+    font-size:15pt;
+    font-weight:900;
+  }
+  .tag{
+    background: rgba(58,160,230,.12);
+    border:2px solid rgba(0,0,0,.25);
+    border-radius:999px;
+    padding:2px 8px;
+    font-size:8.5pt;
+    font-weight:200;
+    white-space:nowrap;
+    cursor:pointer;
+  }
+  .ansRow{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    gap:1px;
+    align-items:center;
+  }
+  .answerInput{
+    height:20px;
+    padding:0 10px;
+    border:2px solid rgba(0,0,0,.35);
+    border-radius:10px;
+    font-weight:900;
+    text-transform: uppercase;
+    outline:none;
+    width:100%;
+  }
+  .answerBtn{
+    height:20px;
+    padding:0 12px;
+    border:2px solid rgba(0,0,0,.45);
+    border-radius:999px;
+    font-weight:900;
+    cursor:pointer;
+    background:#fff;
+  }
+  .answerMsg{
+    margin-top:2px;
+    font-size:8.6pt;
+    font-weight:900;
+    text-align:left;
+    padding-left:2px;
+  }
+  .is-wrong .answerInput{ border-color:#d94b3a; color:#d94b3a; }
+  .is-right .answerInput{ border-color:#3aa0e6; color:#3aa0e6; background: rgba(58,160,230,.08); }
+  .is-right .answerBtn{ opacity:.55; pointer-events:none; }
+  .is-right .tag{ border-color:#3aa0e6; }
+
+  /* ===== página 2 ===== */
+  .p2List{
+    font-size:9pt;
+    font-weight:900;
+    line-height:1.18;
+  }
+  .p2Fields{
+    margin-top:8px;
+    display:grid;
+    gap:6px;
+  }
+  .p2Row{
+    display:grid;
+    grid-template-columns: 70px 1fr;
+    gap:6px;
+    align-items:center;
+  }
+  .trTag{
+    background: rgba(155,89,182,.10);
+    border:2px solid rgba(0,0,0,.18);
+    border-radius:999px;
+    padding:2px 8px;
+    font-size:8.5pt;
+    font-weight:900;
+    white-space:nowrap;
+    text-align:center;
+  }
+
+  /* ===== REGISTRO DO ALUNO + CERTIFICADO ===== */
+  #studentRegister{
+    width: min(520px, calc(100vw - 24px));
+    margin: 14px auto 10px auto;
+    background:#fff;
+    border:3px solid var(--blue);
+    border-radius:14px;
+    padding:14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  }
+  #studentRegister .regTitle{
+    font-weight:900;
+    text-align:center;
+    color: var(--violet);
+    letter-spacing:.4px;
+    margin-bottom:10px;
+  }
+  #studentRegister .regRow{
+    display:grid;
+    grid-template-columns: 92px 1fr;
+    gap:8px;
+    align-items:center;
+    margin-bottom:8px;
+  }
+  #studentRegister .regLabel{
+    font-weight:900;
+    font-size:9.5pt;
+    color:#111;
+    text-align:right;
+  }
+  #studentRegister .regInput{
+    height:34px;
+    padding:0 10px;
+    border:2px solid rgba(0,0,0,.35);
+    border-radius:10px;
+    font-weight:900;
+    outline:none;
+  }
+  #studentRegister .regBtn{
+    width:100%;
+    height:38px;
+    border:none;
+    border-radius:12px;
+    font-weight:900;
+    cursor:pointer;
+    background: var(--blue);
+    color:#fff;
+    letter-spacing:.4px;
+  }
+  #studentRegister .regHint{
+    margin-top:8px;
+    font-size:9pt;
+    text-align:center;
+    color:#111;
+  }
+
+  #certOverlay{
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index: 9999;
+    padding: 18px;
+  }
+  #certCard{
+    width: min(820px, 100%);
+    background: var(--paper);
+    border: 6px solid var(--blue);
+    border-radius: 18px;
+    box-shadow: 0 18px 55px rgba(0,0,0,.35);
+    padding: 18px;
+  }
+  #certInner{
+    background:#fff;
+    border: 3px dotted var(--violet);
+    border-radius: 14px;
+    padding: 18px 18px 14px 18px;
+    text-align:center;
+  }
+  #certTitle{
+    font-weight:900;
+    color: var(--violet);
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    font-size: 16pt;
+    margin: 2px 0 8px 0;
+  }
+  #certSub{
+    font-weight:900;
+    color:#111;
+    margin: 0 0 10px 0;
+  }
+  #certName{
+    font-weight:900;
+    font-size: 16pt;
+    color:#111;
+    margin: 4px 0 10px 0;
+  }
+  #certMeta{
+    font-size: 11pt;
+    color:#111;
+    line-height:1.35;
+  }
+  #certBtns{
+    margin-top: 14px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .certBtn{
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 2px solid rgba(0,0,0,.45);
+    background:#fff;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .certBtnPrimary{
+    background: var(--blue);
+    color:#fff;
+    border-color: transparent;
+  }
+
+  @media print{
+  *{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ESCONDE TUDO */
+  body *{
+    visibility: hidden !important;
+  }
+
+  /* MOSTRA SOMENTE O CERTIFICADO */
+  #certOverlay,
+  #certOverlay *{
+    visibility: visible !important;
+  }
+
+  /* CERTIFICADO OCUPA A PÁGINA */
+  #certOverlay{
+    position: absolute !important;
+    inset: 0 !important;
+    background: #fff !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  #certCard{
+    box-shadow: none !important;
+    border: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  @page{
+    size: A4 landscape;
+    margin: 0;
+  }
+}
+/* =========================================
+   OVERLAY (CAIXA DE EXPLICAÇÃO DAS LETRAS)
+   - Sobrepõe no meio da tela (full screen)
+   - Card grande (como se pegasse as 2 colunas)
+========================================= */
+#letterOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.58);
+  display: none;               /* abre via JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  padding: 18px;
+}
+
+#letterCard{
+  width: min(1100px, 96vw);    /* “pega as 2 colunas” */
+  max-height: 92vh;
+  overflow: auto;
+  background: var(--paper);
+  border: 6px solid var(--violet);
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(0,0,0,.38);
+  padding: 14px;
+}
+
+#letterInner{
+  background:#fff;
+  border: 3px dotted var(--blue);
+  border-radius: 14px;
+  padding: 16px;
+  text-align:center;
+}
+
+#letterBig{
+  font-weight: 900;
+  font-size: 22pt;
+  color: var(--violet);
+  letter-spacing: .8px;
+  margin: 4px 0 10px 0;
+}
+
+#letterInfo{
+  font-size: 12pt;
+  font-weight: 900;
+  color:#111;
+  line-height: 1.35;
+  margin: 0 0 10px 0;
+}
+
+#letterExtra{
+  font-size: 10.5pt;
+  color:#111;
+  line-height: 1.35;
+  margin: 0;
+}
+
+#letterBtns{
+  margin-top: 14px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.letterBtn{
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(0,0,0,.45);
+  background:#fff;
+  font-weight: 900;
+  cursor:pointer;
+}
+
+.letterBtnPrimary{
+  background: var(--blue);
+  color:#fff;
+  border-color: transparent;
+}
+/* =========================================================
+   TEMA LATINO-ESPANHOL (SÓ VISUAL)
+   - NÃO muda estrutura / JS / layout do jogo
+   - Só melhora fundo, cards, botões, títulos
+========================================================= */
+
+/* 0) Paleta latina (suave, imprimível) */
+:root{
+  --lat-a:#19b6c8;   /* turquesa */
+  --lat-b:#ff6b6b;   /* coral */
+  --lat-c:#f4c430;   /* amarelo */
+  --lat-d:#7c4dff;   /* violeta */
+  --ink:#151515;
+}
+
+/* 1) Fundo da tela (fora da folha) */
+body{
+  background:
+    radial-gradient(1200px 500px at 20% 0%, rgba(255,107,107,.14), transparent 60%),
+    radial-gradient(900px 450px at 90% 10%, rgba(25,182,200,.14), transparent 55%),
+    radial-gradient(900px 450px at 35% 100%, rgba(244,196,48,.12), transparent 55%),
+    url("latino-bg.png");
+  background-size: auto, auto, auto, 900px 900px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-attachment: fixed;
+}
+
+/* 2) Folha (page) com “papel latino” + vinheta suave */
+.page{
+  border-radius: 16px;
+  box-shadow: 0 18px 55px rgba(0,0,0,.22);
+  background:
+    radial-gradient(1000px 420px at 50% -10%, rgba(255,255,255,.75), transparent 60%),
+    radial-gradient(900px 520px at 50% 115%, rgba(0,0,0,.05), transparent 60%),
+    url("latino-page.png");
+  background-size: auto, auto, cover;
+  background-position: center;
+}
+
+/* 2.1) “Aro” decorativo bem sutil na borda interna */
+.page::before{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border-radius: 14px;
+  border: 2px solid rgba(124,77,255,.10);
+  pointer-events:none;
+}
+
+/* 2.2) Cantos decorativos (PNG transparente) */
+.page::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image: url("latino-corners.png");
+  background-repeat:no-repeat;
+  background-size: 300mm 250mm;
+  opacity:.20; /* bem suave (p/ imprimir) */
+  mix-blend-mode:multiply;
+}
+
+/* 3) Barra de título com mais “cara de capa” */
+.centerTitle{
+  color: #3b1a6b;
+  text-shadow: 0 1px 0 rgba(255,255,255,.65);
+  letter-spacing: 1px;
+}
+
+/* 3.1) Linhas azuis viram “faixa latina” */
+.bar{
+  background:
+    linear-gradient(90deg,
+      rgba(25,182,200,.95),
+      rgba(244,196,48,.95),
+      rgba(255,107,107,.95),
+      rgba(124,77,255,.95)
+    );
+  box-shadow: 0 2px 0 rgba(0,0,0,.12) inset;
+}
+
+/* 4) Cards mais “premium” */
+.card{
+  background:
+    linear-gradient(#ffffff, rgba(255,255,255,.92));
+  border: 2px solid rgba(124,77,255,.22);
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.08),
+    0 0 0 4px rgba(25,182,200,.06) inset;
+}
+
+/* 4.1) Títulos dos cards com faixa */
+.cardTitle{
+  color:#2b0a50;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg,
+      rgba(25,182,200,.14),
+      rgba(244,196,48,.14),
+      rgba(255,107,107,.12),
+      rgba(124,77,255,.12)
+    );
+  border: 1px solid rgba(0,0,0,.10);
+}
+
+/* 5) Botões de controle (TESTAR / PARAR) */
+.ctrlBtn{
+  border-color: rgba(0,0,0,.40);
+  background:
+    linear-gradient(#fff, rgba(255,255,255,.78));
+  box-shadow: 0 6px 14px rgba(0,0,0,.10);
+  transition: transform .08s ease, box-shadow .12s ease;
+}
+.ctrlBtn:hover{ transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,.12); }
+
+/* 6) Painel de fala (mais destacado) */
+.speakPanel{
+  background:
+    radial-gradient(600px 120px at 50% 0%, rgba(244,196,48,.18), transparent 60%),
+    radial-gradient(520px 160px at 0% 100%, rgba(25,182,200,.16), transparent 60%),
+    rgba(255,255,255,.65);
+  border-color: rgba(124,77,255,.28);
+}
+
+/* 7) Botões do alfabeto (mais “brilho” e identidade latina) */
+.abcBtn{
+  border-color: rgba(0,0,0,.45);
+  box-shadow: 0 6px 0 rgba(0,0,0,.22), 0 10px 16px rgba(0,0,0,.10);
+  transition: transform .06s ease, box-shadow .10s ease, filter .10s ease;
+}
+.abcBtn:hover{
+  filter: brightness(1.02) saturate(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 7px 0 rgba(0,0,0,.22), 0 14px 18px rgba(0,0,0,.12);
+}
+
+/* Mantém suas classes coloridas, só dá “acabamento” */
+.c0,.c1,.c2,.c3,.c4,.c5{ outline: 2px solid rgba(255,255,255,.55); outline-offset:-2px; }
+
+/* 8) Tags dos áudios e botões OK com cara de adesivo */
+.tag{
+  background:
+    linear-gradient(90deg, rgba(25,182,200,.14), rgba(244,196,48,.14), rgba(255,107,107,.12));
+  border-color: rgba(0,0,0,.18);
+}
+.answerBtn{
+  background:
+    linear-gradient(#fff, rgba(255,255,255,.85));
+  box-shadow: 0 6px 12px rgba(0,0,0,.10);
+}
+.answerBtn:hover{ transform: translateY(-1px); }
+
+/* 9) Campos com foco mais bonito */
+.answerInput:focus, #studentRegister .regInput:focus{
+  border-color: rgba(25,182,200,.85);
+  box-shadow: 0 0 0 3px rgba(25,182,200,.14);
+}
+
+/* 10) Registro do aluno com “capa latina” */
+#studentRegister{
+  background:
+    radial-gradient(520px 160px at 50% 0%, rgba(244,196,48,.16), transparent 60%),
+    radial-gradient(520px 180px at 0% 100%, rgba(255,107,107,.12), transparent 60%),
+    #fff;
+  border-color: rgba(25,182,200,.95);
+}
+
+/* 11) Certificado mais elegante */
+#certCard{
+  background:
+    radial-gradient(900px 260px at 50% 0%, rgba(244,196,48,.12), transparent 60%),
+    radial-gradient(820px 260px at 0% 100%, rgba(25,182,200,.10), transparent 60%),
+    var(--paper);
+  border-color: rgba(25,182,200,.95);
+}
+#certInner{
+  background:
+    linear-gradient(#fff, rgba(255,255,255,.92));
+}
+
+/* 12) Overlay da letra (já existe) — só dá “tema latino” */
+#letterCard{
+  border-color: rgba(124,77,255,.95);
+  background:
+    radial-gradient(900px 240px at 50% 0%, rgba(244,196,48,.12), transparent 60%),
+    radial-gradient(900px 240px at 0% 100%, rgba(255,107,107,.10), transparent 60%),
+    var(--paper);
+}
+#letterInner{
+  background: linear-gradient(#fff, rgba(255,255,255,.92));
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===========================
+     REGISTRO DO ALUNO
+     =========================== -->
+<div id="studentRegister" aria-label="Registro do aluno">
+  <div class="regTitle">REGISTRO DO ALUNO</div>
+
+  <div class="regRow">
+    <div class="regLabel">NOME:</div>
+    <input id="studentName" class="regInput" autocomplete="off" placeholder="Digite o nome do aluno">
+  </div>
+
+  <div class="regRow">
+    <div class="regLabel">TURMA:</div>
+    <input id="studentClass" class="regInput" autocomplete="off" placeholder="Ex.: 6º A / EJA">
+  </div>
+
+  <div class="regRow">
+    <div class="regLabel">ESCOLA:</div>
+    <input id="studentSchool" class="regInput" autocomplete="off" placeholder="Nome da escola">
+  </div>
+
+  <button class="regBtn" type="button" onclick="saveStudent()">INICIAR ATIVIDADES</button>
+  <div class="regHint">Preencha os dados e clique em <b>INICIAR</b>.</div>
+</div>
+
+<!-- ===========================
+     CERTIFICADO (APARECE NO FINAL)
+     =========================== -->
+<div id="certOverlay" aria-label="Certificado de conclusão">
+  <div id="certCard">
+    <div id="certInner">
+      <div id="certTitle">Certificado de Conclusão</div>
+      <div id="certSub">Alfabeto Español — Aula 1 </div>
+
+      <div style="margin-top:10px; font-size:11pt; color:#111;">
+        Certificamos que
+      </div>
+      <div id="certName">—</div>
+
+      <div id="certMeta">
+        Turma: <b id="certTurma">—</b><br>
+        Escola: <b id="certEscola">—</b><br><br>
+        Concluiu todas as atividades desta apostila.<br><br>
+        Data: <b id="certData">—</b> • Hora: <b id="certHora">—</b>
+      </div>
+
+      <div id="certBtns">
+        <button class="certBtn" type="button" onclick="closeCertificate()">FECHAR</button>
+        <button class="certBtn certBtnPrimary" type="button" onclick="window.print()">IMPRIMIR</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ===========================
+     OVERLAY — EXPLICAÇÃO DA LETRA (SOBREPOSTO)
+     =========================== -->
+<div id="letterOverlay" aria-label="Explicação da letra">
+  <div id="letterCard">
+    <div id="letterInner">
+      <div id="letterBig">—</div>
+
+      <div id="letterInfo">—</div>
+      <p id="letterExtra">—</p>
+
+      <div id="letterBtns">
+        <button class="letterBtn" type="button" onclick="closeLetterOverlay()">VOLTAR</button>
+        <button class="letterBtn letterBtnPrimary" type="button" onclick="repeatLetter()">REPETIR 🔊</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="book" style="display:none;">
+
+  <!-- ===================================================== -->
+  <!-- ✅ PÁGINA 1 -->
+  <!-- ===================================================== -->
+  <section class="page" aria-label="Página 1 — Atividade 1">
+    <div class="content">
+
+      <div class="titleRow">
+        <div class="bncc" style="padding-right:26mm;">AULA 1</div>
+        <div class="centerTitle">Alfabeto Español + Escuta</div>
+        <div class="bncc" style="padding-right:2mm;">ESPAÑOL</div>
+      </div>
+
+      <div class="bars">
+        <div class="bar"></div><div style="width:12px;"></div><div class="bar"></div>
+      </div>
+
+      <div class="cols">
+
+        <!-- ESQUERDA -->
+        <div>
+          <div class="card">
+            <div class="cardTitle">ALFABETO EM ESPANHOL — BOTÕES 🔊</div>
+            <div class="hint"><b>COMANDO:</b> Clique na letra. O narrador fala o <b>nome</b> e o <b>som</b>.</div>
+
+            <div class="controls">
+              <button class="ctrlBtn" id="btnTestVoice" type="button">TESTAR VOZ</button>
+              <button class="ctrlBtn" id="btnStop" type="button">PARAR</button>
+            </div>
+
+            <div class="speakPanel" aria-live="polite">
+              <div class="speakBig" id="screenLetter">Clique em uma letra</div>
+              <div class="speakSmall" id="screenSpeak">Nome e som aparecerão aqui.</div>
+            </div>
+
+            <div class="abcGrid" id="abcGrid"></div>
+
+            <div class="speakSmall" style="margin-top:6px;">
+              Ñ = “eñe” • RR = “erre doble” • H = muda
+            </div>
+          </div>
+        </div>
+
+        <!-- DIREITA -->
+        <div>
+          <div class="card">
+            <div class="cardTitle">ATIVIDADE 1 — DESAFIO DA ESCUTA (COM IMAGEM)</div>
+
+            <p class="actText">
+              O professor toca um áudio com uma palavra em espanhol. Você deve:
+              <b>(1)</b> escrever a tradução em português e <b>(2)</b> dizer onde está o desenho na grade:
+              <b style="color:var(--red);">LINHA</b> (vermelho) e <b style="color:var(--blue);">COLUNA</b> (azul).
+              <br><b>RESPOSTA:</b> PALAVRA + LxCy | Ex.: MANZANA L3C4
+            </p>
+
+            <div class="gridImgWrap">
+              <img
+                src="atividade1alfabeto.png"
+                alt="Grade 4x4 com numeração de linhas e colunas"
+                class="gridImg"
+                style="width:60%; margin:0 auto;"
+              >
+            </div>
+
+            <div class="answers" aria-label="Áudios da atividade">
+              <div id="boxA1"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(1)">▶ ÁUDIO 1</button>
+                <input id="inpA1" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(1)">OK</button>
+              </div><audio id="a1" src="carretera.mp3"></audio><div class="answerMsg" id="msgA1"></div></div>
+
+              <div id="boxA2"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(2)">▶ ÁUDIO 2</button>
+                <input id="inpA2" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(2)">OK</button>
+              </div><audio id="a2" src="pastel.mp3"></audio><div class="answerMsg" id="msgA2"></div></div>
+
+              <div id="boxA3"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(3)">▶ ÁUDIO 3</button>
+                <input id="inpA3" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(3)">OK</button>
+              </div><audio id="a3" src="calcetines.mp3"></audio><div class="answerMsg" id="msgA3"></div></div>
+
+              <div id="boxA4"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(4)">▶ ÁUDIO 4</button>
+                <input id="inpA4" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(4)">OK</button>
+              </div><audio id="a4" src="muñeca.mp3"></audio><div class="answerMsg" id="msgA4"></div></div>
+
+              <div id="boxA5"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(5)">▶ ÁUDIO 5</button>
+                <input id="inpA5" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(5)">OK</button>
+              </div><audio id="a5" src="tortuga.mp3"></audio><div class="answerMsg" id="msgA5"></div></div>
+
+              <div id="boxA6"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(6)">▶ ÁUDIO 6</button>
+                <input id="inpA6" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(6)">OK</button>
+              </div><audio id="a6" src="cucaracha.mp3"></audio><div class="answerMsg" id="msgA6"></div></div>
+
+              <div id="boxA7"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(7)">▶ ÁUDIO 7</button>
+                <input id="inpA7" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(7)">OK</button>
+              </div><audio id="a7" src="azafata.mp3"></audio><div class="answerMsg" id="msgA7"></div></div>
+
+              <div id="boxA8"><div class="ansRow">
+                <button class="tag" type="button" onclick="playAudio(8)">▶ ÁUDIO 8</button>
+                <input id="inpA8" class="answerInput" autocomplete="off">
+                <button class="answerBtn" type="button" onclick="checkAudio(8)">OK</button>
+              </div><audio id="a8" src="embarazada.mp3"></audio><div class="answerMsg" id="msgA8"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /cols -->
+    </div><!-- /content -->
+  </section>
+
+  <!-- ===================================================== -->
+  <!-- ✅ PÁGINA 2 — ATIVIDADE 2 (ESQUERDA: ADIVINHAÇÕES+RESPOSTAS | DIREITA: IMAGEM) -->
+  <!-- ===================================================== -->
+  <section class="page" aria-label="Página 2 — Atividade 2">
+    <div class="content">
+
+      <div class="titleRow">
+        <div class="bncc" style="padding-right:26mm;">AULA 1</div>
+        <div class="centerTitle">ATIVIDADE 2 — SOPA DE LETRAS</div>
+        <div class="bncc" style="padding-right:2mm;">ESPAÑOL</div>
+      </div>
+
+      <div class="bars">
+        <div class="bar"></div><div style="width:12px;"></div><div class="bar"></div>
+      </div>
+
+      <div class="cols">
+
+        <!-- ✅ ESQUERDA: ADIVINHAÇÕES + CAMPOS (COM VALIDAÇÃO) -->
+        <div>
+          <div class="card">
+            <div class="cardTitle">ADIVINHAÇÕES + RESPOSTAS (VALIDAÇÃO)</div>
+
+            <p class="actText" style="margin:0;">
+              Escreva a palavra <b>em espanhol</b> e a posição no formato:<br>
+              <b>PALAVRA CxLy-CxLy</b> (exatamente assim)
+            </p>
+
+            <div class="p2List" style="margin-top:8px;">
+              1 - No soy gordo, mi cuerpo es fino y ligero. ¿Cómo soy?<br>
+              2 - Por mí pasan los coches, une ciudades y pueblos. No soy calle, ¿qué soy?<br>
+              3 - Soy dulce y delicioso, me comes en cumpleaños y fiestas. ¿Qué soy?<br>
+              4 - Me usas en los pies, voy dentro de los zapatos y casi siempre voy en par.<br>
+              5 - No soy una niña, pero parezco una. Los niñas juegan conmigo.<br>
+              6 - Camino despacio, llevo mi casa en la espalda. ¿Quién soy?<br>
+              7 - No soy bonita para muchos, vivo en lugares sucios y corro muy rápido.<br>
+              8 - No soy cabeza ni pecho, pero los uno a los dos. ¿Qué parte del cuerpo soy?<br>
+              9 - Soy un insecto verde, tengo patas largas y parezco rezar.<br>
+              10 - Transporto personas, soy grande y voy por la ciudad.
+            </div>
+
+            <!-- CAMPOS + OK (10) -->
+            <div class="p2Fields">
+
+              <div id="boxB1">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">1)</span>
+                  <input id="inpB1" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(1)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB1"></div>
+              </div>
+
+              <div id="boxB2">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">2)</span>
+                  <input id="inpB2" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(2)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB2"></div>
+              </div>
+
+              <div id="boxB3">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">3)</span>
+                  <input id="inpB3" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(3)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB3"></div>
+              </div>
+
+              <div id="boxB4">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">4)</span>
+                  <input id="inpB4" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(4)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB4"></div>
+              </div>
+
+              <div id="boxB5">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">5)</span>
+                  <input id="inpB5" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(5)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB5"></div>
+              </div>
+
+              <div id="boxB6">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">6)</span>
+                  <input id="inpB6" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(6)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB6"></div>
+              </div>
+
+              <div id="boxB7">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">7)</span>
+                  <input id="inpB7" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(7)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB7"></div>
+              </div>
+
+              <div id="boxB8">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">8)</span>
+                  <input id="inpB8" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(8)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB8"></div>
+              </div>
+
+              <div id="boxB9">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">9)</span>
+                  <input id="inpB9" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(9)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB9"></div>
+              </div>
+
+              <div id="boxB10">
+                <div class="ansRow" style="grid-template-columns: 48px 1fr auto;">
+                  <span class="trTag">10)</span>
+                  <input id="inpB10" class="answerInput" autocomplete="off">
+                  <button class="answerBtn" type="button" onclick="checkB(10)">OK</button>
+                </div>
+                <div class="answerMsg" id="msgB10"></div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ✅ DIREITA: SOMENTE A IMAGEM (BEM PREENCHIDA) -->
+        <div>
+          <div class="card">
+            <div class="cardTitle">SOPA DE LETRAS (13×13)</div>
+
+            <!-- TROQUE O NOME DO ARQUIVO PELA SUA IMAGEM -->
+            <div class="gridImgWrap" style="margin-top:6px;">
+              <img
+                src="sopa-atividade2.png"
+                alt="Sopa de letras 13x13"
+                class="gridImg"
+                style="width:100%; height:auto;"
+              >
+            </div>
+
+            <div class="hint" style="margin-top:8px;">
+              Marque a palavra e anote o ponto inicial (LxCy).
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cols -->
+    </div><!-- /content -->
+  </section>
+
+</div><!-- /wrap -->
+
+<script>
+/* ===========================
+   ALFABETO EM ESPANHOL (BOTÕES + NARRADOR)
+   =========================== */
+const letters = [
+  { key:"A",  name:"a",          sound:"a" },
+  { key:"B",  name:"be",         sound:"be" },
+  { key:"C",  name:"ce",         sound:"se o ke" },
+  { key:"D",  name:"de",         sound:"de" },
+  { key:"E",  name:"e",          sound:"e" },
+  { key:"F",  name:"efe",        sound:"fe" },
+  { key:"G",  name:"ge",         sound:"g   o   ge" },
+  { key:"H",  name:"hache",      sound:"(muda) sem som" },
+  { key:"I",  name:"i",          sound:"i" },
+  { key:"J",  name:"jota",       sound:"j" },
+  { key:"K",  name:"ka",         sound:"ke" },
+  { key:"L",  name:"ele",        sound:"le" },
+  { key:"M",  name:"eme",        sound:"me" },
+  { key:"N",  name:"ene",        sound:"ne" },
+  { key:"Ñ",  name:"eñe",        sound:"ñe" },
+  { key:"O",  name:"o",          sound:"o" },
+  { key:"P",  name:"pe",         sound:"pe" },
+  { key:"Q",  name:"cu",         sound:"ke" },
+  { key:"R",  name:"erre",       sound:"r" },
+  { key:"S",  name:"ese",        sound:"se" },
+  { key:"T",  name:"te",         sound:"te" },
+  { key:"U",  name:"u",          sound:"u" },
+  { key:"V",  name:"uve",        sound:"be (parece B)" },
+  { key:"W",  name:"uve doble",  sound:"u o be" },
+  { key:"X",  name:"equis",      sound:"ks" },
+  { key:"Y",  name:"ye",         sound:"i" },
+  { key:"Z",  name:"zeta",       sound:"se" },
+  { key:"CH", name:"che",        sound:"ch" },
+  { key:"LL", name:"doble ele",  sound:"lle" },
+  { key:"RR", name:"erre doble", sound:"r (R forte)" }
+];
+
+const grid = document.getElementById("abcGrid");
+const screenLetter = document.getElementById("screenLetter");
+const screenSpeak  = document.getElementById("screenSpeak");
+// Overlay da explicação
+const letterOverlay = document.getElementById("letterOverlay");
+const letterBig     = document.getElementById("letterBig");
+const letterInfo    = document.getElementById("letterInfo");
+const letterExtra   = document.getElementById("letterExtra");
+
+let lastLetterItem = null; // para repetir áudio
+
+const colorClasses = ["c0","c1","c2","c3","c4","c5"];
+
+let voices = [];
+function loadVoices(){ voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
+if ("speechSynthesis" in window){ loadVoices(); window.speechSynthesis.onvoiceschanged = loadVoices; }
+
+function pickSpanishVoice(){
+  const v = voices || [];
+  const googleES = v.find(vo => /google/i.test(vo.name) && /es(-|_)?/i.test(vo.lang));
+  if (googleES) return googleES;
+  const anyES = v.find(vo => /es(-|_)?/i.test(vo.lang));
+  if (anyES) return anyES;
+  return v[0] || null;
+}
+
+function speakSpanish(text){
+  if (!("speechSynthesis" in window)){ alert("Este navegador não suporta narração. Use Chrome/Edge."); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const voice = pickSpanishVoice();
+  if (voice) u.voice = voice;
+  u.lang = (voice && voice.lang) ? voice.lang : "es-ES";
+  u.rate = 0.92; u.pitch = 1.0; u.volume = 1.0;
+  speechSynthesis.speak(u);
+}
+function openLetterOverlay(item){
+  lastLetterItem = item;
+
+  // Texto grande (mostra a letra)
+  letterBig.textContent = `LETRA: ${item.key}`;
+
+  // Conteúdo principal (nome + som)
+  letterInfo.textContent = `Nome: ${item.name.toUpperCase()}  —  Som: ${item.sound}`;
+
+  // Linha extra (dica curta)
+  // (Se você quiser, pode melhorar por letra depois)
+  letterExtra.textContent = "Clique em REPETIR para ouvir novamente. Clique em VOLTAR para retornar aos botões.";
+
+  // Mostra overlay
+  letterOverlay.style.display = "flex";
+}
+
+function closeLetterOverlay(){
+  letterOverlay.style.display = "none";
+}
+
+function repeatLetter(){
+  if(!lastLetterItem) return;
+  speakSpanish(buildSpeech(lastLetterItem));
+}
+
+// Fecha ao clicar fora do card
+letterOverlay.addEventListener("click", (e) => {
+  if(e.target === letterOverlay) closeLetterOverlay();
+});
+
+// Tecla ESC fecha
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && letterOverlay.style.display === "flex"){
+    closeLetterOverlay();
+  }
+});
+
+function buildSpeech(item){ return `Letra ${item.key}. Se llama ${item.name}. Suena ${item.sound}.`; }
+function onLetterClick(item){
+  // Atualiza o painel da página (mantém)
+  screenLetter.textContent = `LETRA: ${item.key}`;
+  screenSpeak.textContent  = `Nome: ${item.name.toUpperCase()} — Som: ${item.sound}`;
+
+  // ✅ Abre a caixa sobreposta no meio da tela
+  openLetterOverlay(item);
+
+  // Narra normalmente
+  speakSpanish(buildSpeech(item));
+}
+
+
+function renderButtons(){
+  grid.innerHTML = "";
+  letters.forEach((item, idx) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `abcBtn ${colorClasses[idx % colorClasses.length]}`;
+    btn.textContent = item.key;
+    btn.addEventListener("click", () => onLetterClick(item));
+    grid.appendChild(btn);
+  });
+}
+renderButtons();
+
+document.getElementById("btnStop").addEventListener("click", () => {
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+});
+document.getElementById("btnTestVoice").addEventListener("click", () => {
+  speakSpanish("Hola. Vamos a practicar el alfabeto en español.");
+});
+
+/* ===========================
+   ✅ VALIDAÇÃO — TODOS OS ÁUDIOS (1 a 8)
+   =========================== */
+const expectedById = {
+  1: "ESTRADA L1C2",
+  2: "BOLO L1C3",
+  3: "MEIAS L2C1",
+  4: "BONECA L2C2",
+  5: "TARTARUGA L2C3",
+  6: "BARATA L2C4",
+  7: "AEROMOÇA L4C2",
+  8: "GRÁVIDA L4C4"
+};
+
+function normalizeAnswer(s){
+  let t = (s || "").toUpperCase().trim();
+  t = t.replace(/\s+/g, " ");
+  t = t.replace(/L\s*([1-4])\s*C\s*([1-4])/g, "L$1C$2");
+  t = t.replace(/^([A-ZÑÁÉÍÓÚÜ]+)\s*(L[1-4]C[1-4])$/g, "$1 $2");
+  return t;
+}
+
+function playAudio(id){
+  const a = document.getElementById("a"+id);
+  if (a) { a.currentTime = 0; a.play(); }
+  const box = document.getElementById("boxA"+id);
+  const inp = document.getElementById("inpA"+id);
+  if (box && inp && !box.classList.contains("is-right")){
+    setTimeout(()=>inp.focus(), 120);
+  }
+}
+
+function checkAudio(id){
+  const box = document.getElementById("boxA"+id);
+  const inp = document.getElementById("inpA"+id);
+  const msg = document.getElementById("msgA"+id);
+  if (!box || !inp || !msg) return;
+  if (box.classList.contains("is-right")) return;
+
+  const expected = expectedById[id];
+  const got = normalizeAnswer(inp.value);
+
+  if (got === expected){
+    box.classList.remove("is-wrong");
+    box.classList.add("is-right");
+    msg.textContent = "✅ ACERTOU! SALVO.";
+    msg.style.color = "#3aa0e6";
+    inp.disabled = true;
+    inp.blur();
+    maybeFinish();
+  } else {
+    box.classList.remove("is-right");
+    box.classList.add("is-wrong");
+    msg.textContent = "❌ TENTE DE NOVO!";
+    msg.style.color = "#d94b3a";
+    inp.focus();
+    inp.select();
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  const el = document.activeElement;
+  if (!el || !el.id || !el.id.startsWith("inpA")) return;
+  e.preventDefault();
+  const id = parseInt(el.id.replace("inpA",""), 10);
+  if (id >= 1 && id <= 8) checkAudio(id);
+});
+
+/* ===========================
+   ✅ ATIVIDADE 2 — VALIDAÇÃO EXATA (CxLy-CxLy / LxCy-LxCy)
+   =========================== */
+const expectedB = {
+  1: "DELGADO C6L7-C12L1",
+  2: "CARRETERA C12L12-C12L4",
+  3: "PASTEL C2L12-C2L7",
+  4: "CALCETINES C1L10-C1L1",
+  5: "MUÑECA C4L9-C4L4",
+  6: "TORTUGA C3L8-C3L2",
+  7: "CUCARACHA L12C3-L12C11",
+  8: "CUELLO L13C10-L13C5",
+  9: "MANTIS L9C6-L9C11",
+  10:"BUCETÓN C5L7-C5L1"
+};
+
+function normB(s){
+  // só normaliza espaços e caixa alta (não altera ordem C/L)
+  return (s || "")
+    .toUpperCase()
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function checkB(n){
+  const box = document.getElementById("boxB"+n);
+  const inp = document.getElementById("inpB"+n);
+  const msg = document.getElementById("msgB"+n);
+  if(!box || !inp || !msg) return;
+
+  if(box.classList.contains("is-right")) return;
+
+  const expected = normB(expectedB[n]);
+  const got = normB(inp.value);
+
+  if(got === expected){
+    box.classList.remove("is-wrong");
+    box.classList.add("is-right");
+    msg.textContent = "✅ ACERTOU! SALVO.";
+    msg.style.color = "#3aa0e6";
+    inp.disabled = true;
+    inp.blur();
+    maybeFinish();
+  }else{
+    box.classList.remove("is-right");
+    box.classList.add("is-wrong");
+    msg.textContent = "❌ TENTE DE NOVO!";
+    msg.style.color = "#d94b3a";
+    inp.focus();
+    inp.select();
+  }
+}
+
+/* ENTER = OK na ATIVIDADE 2 */
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  const el = document.activeElement;
+  if (!el || !el.id || !el.id.startsWith("inpB")) return;
+  e.preventDefault();
+  const n = parseInt(el.id.replace("inpB",""), 10);
+  if (n >= 1 && n <= 10) checkB(n);
+});
+
+/* ===========================
+   ✅ REGISTRO DO ALUNO + CERTIFICADO
+   =========================== */
+let student = null;
+let certShown = false;
+
+function saveStudent(){
+  const name = document.getElementById("studentName").value.trim();
+  const turma = document.getElementById("studentClass").value.trim();
+  const escola = document.getElementById("studentSchool").value.trim();
+
+  if(!name || !turma || !escola){
+    alert("Preencha NOME, TURMA e ESCOLA!");
+    return;
+  }
+
+  student = { name, turma, escola };
+  document.getElementById("studentRegister").style.display = "none";
+  document.getElementById("book").style.display = "flex";
+}
+
+function allCompleted(){
+  const a1Done = document.querySelectorAll(".answers .is-right").length === 8;
+  const a2Done = document.querySelectorAll(".p2Fields .is-right").length === 10;
+  return a1Done && a2Done;
+}
+
+function maybeFinish(){
+  if(certShown) return;
+  if(!student) return;
+  if(!allCompleted()) return;
+  certShown = true;
+  showCertificate();
+}
+
+function showCertificate(){
+  const now = new Date();
+  const date = now.toLocaleDateString("pt-BR");
+  const time = now.toLocaleTimeString("pt-BR");
+
+  document.getElementById("certName").textContent  = student.name;
+  document.getElementById("certTurma").textContent = student.turma;
+  document.getElementById("certEscola").textContent= student.escola;
+  document.getElementById("certData").textContent  = date;
+  document.getElementById("certHora").textContent  = time;
+
+  document.getElementById("certOverlay").style.display = "flex";
+}
+
+function closeCertificate(){
+  document.getElementById("certOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
