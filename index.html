@@ -710,6 +710,88 @@ body{
 #letterInner{
   background: linear-gradient(#fff, rgba(255,255,255,.92));
 }
+/* =========================================================
+   ♿ MODO BAIXA VISÃO — FALANGE (SEM CORTAR)
+   - não mexe no modo normal
+   - no baixa visão: nada corta embaixo nem na lateral
+========================================================= */
+body.lowVision{
+  font-size: 130%;
+  overflow-y: auto;
+}
+
+/* Página: deixa caber na tela e não cortar */
+body.lowVision .page{
+  width: min(300mm, 98vw);     /* seu arquivo usa 300mm */
+  max-width: 300mm;
+  height: auto;                /* deixa crescer */
+  min-height: 250mm;           /* seu arquivo usa 250mm */
+  overflow: visible;           /* nada fica escondido */
+}
+
+/* Conteúdo: reduz margens para ganhar espaço lateral */
+body.lowVision .content{
+  position: relative;          /* solta do "absolute" para crescer */
+  left: 10mm;
+  right: 10mm;
+  top: 10mm;
+  bottom: auto;
+}
+
+/* Sem corte lateral: 2 colunas viram 1 coluna */
+body.lowVision .cols{
+  grid-template-columns: 1fr;
+}
+
+/* Botões, textos e inputs maiores */
+body.lowVision .centerTitle{ font-size: 14pt; }
+body.lowVision .bncc{ font-size: 12pt; }
+body.lowVision .cardTitle{ font-size: 12.5pt; }
+body.lowVision .hint,
+body.lowVision .actText,
+body.lowVision .p2List{ font-size: 11.5pt; line-height: 1.45; }
+
+body.lowVision .ctrlBtn,
+body.lowVision .answerBtn,
+body.lowVision .tag,
+body.lowVision .certBtn,
+body.lowVision .regBtn,
+body.lowVision .letterBtn{
+  font-size: 12pt;
+  padding: 10px 14px;
+  height: auto;
+}
+
+/* Inputs maiores (respostas e registro) */
+body.lowVision .answerInput,
+body.lowVision #studentRegister .regInput{
+  font-size: 12.5pt;
+  height: 44px;
+}
+
+/* Grade do alfabeto: mantém clicável e não estoura */
+body.lowVision .abcGrid{
+  grid-template-columns: repeat(5, 1fr); /* menos colunas = mais largo */
+  gap: 8px;
+}
+body.lowVision .abcBtn{
+  height: 18mm;
+  font-size: 18pt;
+  border-radius: 14px;
+}
+
+/* Imagens nunca empurram largura */
+body.lowVision img{
+  max-width: 100%;
+  height: auto;
+}
+
+/* Overlays (letra/cert) mais confortáveis */
+body.lowVision #letterCard,
+body.lowVision #certCard{
+  width: min(1100px, 98vw);
+  max-height: 92vh;
+}
 
 </style>
 </head>
@@ -736,6 +818,9 @@ body{
     <div class="regLabel">ESCOLA:</div>
     <input id="studentSchool" class="regInput" autocomplete="off" placeholder="Nome da escola">
   </div>
+  <button class="regBtn" type="button" style="background:#111; margin-bottom:8px;" onclick="toggleLowVision()">
+  👁️ BAIXA VISÃO (AUMENTAR)
+</button>
 
   <button class="regBtn" type="button" onclick="saveStudent()">INICIAR ATIVIDADES</button>
   <div class="regHint">Preencha os dados e clique em <b>INICIAR</b>.</div>
@@ -1405,6 +1490,13 @@ function showCertificate(){
 function closeCertificate(){
   document.getElementById("certOverlay").style.display = "none";
 }
+/* =========================================================
+   ♿ TOGGLE BAIXA VISÃO (SEM CORTAR)
+========================================================= */
+function toggleLowVision(){
+  document.body.classList.toggle("lowVision");
+}
+
 </script>
 
 </body>
